@@ -1,23 +1,11 @@
-const path = require('path'),
-    logger = require('../middleware/logger').logger(path.basename(__filename)),
-    log = require('../middleware/logger').log;
+let path = require('path'),
+    log = require('../middleware/logger').log,
+    multiparty = require('multiparty'),
+    express = require('express'),
+    fs = require("fs"),
+    name;
 
 module.exports = function (app) {
-
-    const login = require('./login').router,
-        register = require('./register').router,
-        logout = require('./logout'),
-        multiparty = require('multiparty'),
-        express = require('express'),
-        router = express.Router(),
-        fs = require("fs");
-    let path,
-        name;
-
-    app.use('/', login)
-        .use('/register', register)
-        .use('/logout', logout);
-
 
     app.post('/files', function (req, res, next) {
         // создаем форму
@@ -77,7 +65,7 @@ module.exports = function (app) {
             }
             //если нет ошибок то создаем поток для записи файла
             if (errors.length === 0) {
-                var out = fs.createWriteStream(uploadFile.path);
+                let out = fs.createWriteStream(uploadFile.path);
                 part.pipe(out);
                 //res.send({ status: 'Done', text: 'file uploaded successfully' });
             } else {
@@ -95,4 +83,4 @@ module.exports = function (app) {
             log("WARN", "ошибка при парсинге формы", {error: e, request: req});
         }
     });
-}
+};

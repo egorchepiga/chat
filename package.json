@@ -3,9 +3,11 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www.js"
+    "start": "nodemon ./bin/www.js",
+    "test": "mocha mocha/backend/chat.js"
   },
   "dependencies": {
+    "chai": "^4.1.2",
     "body-parser": "^1.18.2",
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.3",
@@ -32,6 +34,11 @@
     "websocket.io": "^0.2.1"
   },
   "devDependencies": {
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^3.0.3",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "request": "^2.83.0",
     "winston": "^2.4.0"
   }
 }
